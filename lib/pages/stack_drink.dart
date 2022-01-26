@@ -1,7 +1,10 @@
 import 'package:drinkero/model/drink.dart';
+import 'package:drinkero/res/links.dart';
 import 'package:drinkero/res/palet.dart';
 import 'package:drinkero/widgets/information_card.dart';
+import 'package:drinkero/widgets/ingredient_card.dart';
 import 'package:flutter/material.dart';
+import 'package:sprintf/sprintf.dart';
 
 class StackDrink extends StatelessWidget {
   final Drink? drink;
@@ -77,12 +80,37 @@ class StackDrink extends StatelessWidget {
                           ?.copyWith(fontSize: 20),
                     ),
                     InformationCard(drink!),
-                    Text(
-                      'Ingredientes: ${drink?.getIngredients().toString().replaceAll(']', '').replaceAll('[', '')}',
-                      style: Theme.of(context)
-                          .primaryTextTheme
-                          .bodyText2
-                          ?.copyWith(fontSize: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Ingredientes',
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        ),
+                        Text(
+                          '${drink?.getIngredients().length} itens',
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        )
+                      ],
+                    ),
+                    Flexible(
+                      child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 4,
+                                  mainAxisSpacing: 4),
+                          itemCount: drink?.getIngredients().length,
+                          itemBuilder: (context, index) {
+                            return IngredientCard(sprintf(Links.urlImage,
+                                [drink?.getIngredients()[index]]));
+                          }),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16),

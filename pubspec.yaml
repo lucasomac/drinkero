@@ -37,6 +37,7 @@ dependencies:
   retrofit:
   logger:
   json_annotation: ^4.4.0
+  sprintf:
 
 dev_dependencies:
   flutter_test:
