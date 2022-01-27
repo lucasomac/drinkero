@@ -55,8 +55,9 @@ class StackDrink extends StatelessWidget {
                 gradient: LinearGradient(
                     colors: [Color(0xFF22142b), Palet.backgroundColor]),
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(28),
-                    topRight: Radius.circular(28)),
+                  topLeft: Radius.circular(28),
+                  topRight: Radius.circular(28),
+                ),
               ),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.64,
@@ -65,47 +66,61 @@ class StackDrink extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      drink?.strDrink ?? "",
-                      style: Theme.of(context)
-                          .primaryTextTheme
-                          .bodyText1
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      drink?.strAlcoholic ?? "",
-                      style: Theme.of(context)
-                          .primaryTextTheme
-                          .bodyText2
-                          ?.copyWith(fontSize: 20),
-                    ),
-                    InformationCard(drink!),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Ingredientes',
-                          style: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText2
-                              ?.copyWith(fontSize: 16),
+                        Flexible(
+                          child: Text(
+                            drink?.strDrink ?? "",
+                            style: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText1
+                                ?.copyWith(fontWeight: FontWeight.bold),
+                          ),
                         ),
                         Text(
-                          '${drink?.getIngredients().length} itens',
+                          drink?.strAlcoholic ?? "",
                           style: Theme.of(context)
                               .primaryTextTheme
                               .bodyText2
-                              ?.copyWith(fontSize: 16),
-                        )
+                              ?.copyWith(fontSize: 20),
+                        ),
                       ],
                     ),
-                    Flexible(
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InformationCard(drink!),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Ingredientes',
+                            style: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText2
+                                ?.copyWith(fontSize: 16),
+                          ),
+                          Text(
+                            '${drink?.getIngredients().length} itens',
+                            style: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText2
+                                ?.copyWith(fontSize: 16),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
                       child: GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisExtent: 200,
                                   crossAxisCount: 3,
-                                  crossAxisSpacing: 4,
-                                  mainAxisSpacing: 4),
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 16),
                           itemCount: drink?.getIngredients().length,
                           itemBuilder: (context, index) {
                             return IngredientCard(sprintf(Links.urlImage,
@@ -116,12 +131,13 @@ class StackDrink extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 16),
                       child: Text(
                         'Instruções: ${drink?.strInstructions}',
+                        textAlign: TextAlign.justify,
                         style: Theme.of(context)
                             .primaryTextTheme
                             .bodyText2
                             ?.copyWith(fontSize: 20),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

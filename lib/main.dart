@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: Theme.of(context)
                       .primaryTextTheme
                       .bodyText1
-                      ?.copyWith(fontSize: 24)),
+                      ?.copyWith(fontSize: 20)),
               DropdownButton(
                 borderRadius: BorderRadius.circular(8),
                 menuMaxHeight: 300,
@@ -127,7 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
             if (snapshot.hasData) {
               response = snapshot.data!;
               if (snapshot.data?.drinks != null) {
-                return ListView.builder(
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 16),
                   itemBuilder: (context, index) {
                     return DrinkCard(response.drinks![index]);
                   },

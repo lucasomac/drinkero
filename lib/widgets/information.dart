@@ -9,22 +9,22 @@ class Information extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 80,
+    return SizedBox(
+      width: 100,
       height: 30,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Palet.informationDescriptionColor,
                 fontSize: 9,
                 fontFamily: 'Roboto'),
           ),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Palet.informationValueColor,
                 fontSize: 10,
                 fontFamily: 'Roboto'),

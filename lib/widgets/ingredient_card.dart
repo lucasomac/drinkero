@@ -1,3 +1,4 @@
+import 'package:drinkero/res/palet.dart';
 import 'package:flutter/material.dart';
 
 class IngredientCard extends StatelessWidget {
@@ -7,10 +8,26 @@ class IngredientCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      urlImage,
-      width: 30,
-      height: 30,
+    return Material(
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
+      elevation: 16,
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Palet.backgroundColor,
+            Color(0xFF22142b),
+            Palet.backgroundColor
+          ]),
+          borderRadius: BorderRadius.all(
+            Radius.circular(16),
+          ),
+        ),
+        child: Center(
+          child: Image.network(
+            urlImage,
+          ),
+        ),
+      ),
     );
   }
 }
